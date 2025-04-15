@@ -1,0 +1,34 @@
+{
+    "pedidos": [],
+    "tamanhos": [
+      { "id": 1, "nome": "Pequeno" },
+      { "id": 2, "nome": "Médio" },
+      { "id": 3, "nome": "Grande" }
+    ],
+    "bases": [
+      { "id": 1, "nome": "Açaí tradicional" },
+      { "id": 2, "nome": "Açaí com banana" },
+      { "id": 3, "nome": "Açaí com morango" },
+      { "id": 4, "nome": "Açaí com whey (proteinado)" },
+      { "id": 5, "nome": "Cupuaçu" }
+    ],
+    "ingredientes": {
+      "frutas": [
+        { "id": 1, "nome": "Banana" },
+        { "id": 2, "nome": "Morango" },
+        { "id": 3, "nome": "Manga" },
+        { "id": 4, "nome": "Kiwi" },
+        { "id": 5, "nome": "Uva" },
+        { "id": 6, "nome": "Abacaxi" }
+      ],
+      "cremes": [
+        { "id": 1, "nome": "Leite condensado" },
+        { "id": 2, "nome": "Nutella" },
+        { "id": 3, "nome": "Leite em pó" },
+        { "id": 4, "nome": "Creme de morango" },
+        { "id": 5, "nome": "Leite ninho trufado" },
+        { "id": 6, "nome": "Creme de avelã" }
+      ]
+    }
+  }
+  
