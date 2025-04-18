@@ -26,7 +26,8 @@
 
         padding: 10px 40px;
         background-color: #9E42EC;
-        color:#fff
+        color:#fff;
+
     }
 
     nav a{
@@ -36,6 +37,8 @@
         color:#fff;
         font-weight: bold;
         transition: 0.4s;
+        z-index: 10;
+        position: relative;
     }
 
     nav a:hover {

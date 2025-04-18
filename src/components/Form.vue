@@ -1,0 +1,247 @@
+<template>
+    <div class="form-container">
+            <h2>Monte seu pedido</h2>
+        <form id="form">
+            <div class="input-control">
+                <label for="">Nome do cliente:</label>
+                <input type="text" placeholder="Digite seu nome">
+            </div>
+
+            <div class="buttons-tamanho">
+                <label for="">Tamanho:</label>
+                <div class="button-control">
+                    <button>Pequeno</button>
+                    <button class="active">Médio</button>
+                    <button>Grande</button>
+                </div>
+            </div>
+
+            <div class="base-container">
+                <label for="">Escolha a base:</label>
+                <select>
+                    <option value="">Selecione a base</option>
+                </select>
+            </div>
+
+            <div class="Ingredientes-container" >
+                <label>Escolha os Ingredientes:</label> 
+                <h4>Frutas:</h4>
+                <div class="checkbox-control">
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+                </div>
+
+                <h4>Cremes:</h4>
+                <div class="checkbox-control">
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+
+                   <div class="checkbox-container">
+                    <input type="checkbox"> 
+                    <label for="">Leite condensado</label>
+                   </div>
+                </div>
+            </div>
+
+            <div class="obs-container">
+                <span>Observações:</span>
+                <textarea name="" id="" placeholder="Deixe aqui alguma observação..."></textarea >
+            </div>
+            
+        </form>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'Form'
+    }
+</script>
+
+<style scoped>
+
+    .form-container {
+        position: relative;
+        z-index: 1;
+        height: auto;
+        background-color: #fff;
+    }
+
+    .form-container label {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        margin-top:1rem ;
+    }
+
+    .form-container h2 {
+        position: relative;
+        text-align: center;
+        font-size: 40px;
+        padding: 3rem 0;
+        color: #200D2F;
+    }
+
+    .form-container h2::after {
+        content: '';
+        position: absolute;
+        bottom: 40px;
+        left: 40%;
+        height: 7px;
+        width: 300px;
+        border-radius: 20px;
+        background: #CE70A0;
+    }
+
+    #form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .input-control {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input-control input {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: none;
+        background: #D9D9D9;
+
+    }
+
+    .input-control input::placeholder {
+        color: #1b1a1a;
+        font-weight: 400;
+    }
+
+    .buttons-tamanho{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button-control button {
+        border-radius: 20px;
+        width: 100px;
+        height: 45px;
+        padding: 10px;
+        border: solid 1px #ccc;
+        cursor: pointer;
+        transition: 0.4s;
+        background-color: #D9D9D9;
+    }
+
+    .button-control button:hover {
+        background: #b4b4b4;
+    }
+
+    .button-control {
+        display: flex;
+        gap: 12px;
+    }
+
+    /* .active {
+     outline: solid 3px blue;
+    } */
+
+    .base-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .base-container select {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: none;
+        background: #D9D9D9;
+    }
+
+    .Ingredientes-container {
+        display: flex;
+        flex-direction: column ;
+    }
+
+    .Ingredientes-container .checkbox-control {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-container {
+       width: 50%;
+       display: flex;
+       align-items: center;
+       gap: 10px;
+    }   
+
+    .checkbox-control label {
+        font-size: 16px;
+    }
+
+       /* checkbox */
+
+    .checkbox-container input {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        border: none;
+    	}
+
+    .obs-container {
+        display: flex;
+        flex-direction:column;
+        resize: none;
+    }
+
+    .obs-container label {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        margin-top:1rem ;
+    }
+
+    .obs-container textarea {
+        resize: none;
+        height: 200px;
+        border-radius: 8px;
+        border: solid 1px #ccc;
+        background-color: #d3d3d3;
+        padding: 20px;
+    }
+
+    .obs-container textarea::placeholder {
+        color: #1b1a1a;
+    }
+</style>
+
