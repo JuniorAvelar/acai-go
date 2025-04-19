@@ -10,9 +10,7 @@
             <div class="buttons-tamanho">
                 <label >Tamanho:</label>
                 <div class="buttons-control">
-                    <button @click="tamanho = 'Pequeno'" :class="{ active: tamanho === 'Pequeno'}">Pequeno</button>
-                    <button :class="{ active : tamanho === 'Médio'}" @click="tamanho = 'Médio'">Médio</button>
-                    <button @click="tamanho = 'Grande'" :class="{ active : tamanho == 'Grande'}">Grande</button>
+                    <button v-for="t in tamanhoApi" :key="t.id" @click="tamanho = t.nome" :class="{ active: tamanho === t.nome}">{{ t.nome }}</button>
                 </div>
             </div>
 
@@ -45,7 +43,7 @@
 
             <div class="obs-container">
                 <label for="">Observações:</label>
-                <textarea v-model="observacao" name="" id="" placeholder="Deixe aqui alguma observação..."></textarea >
+                <textarea v-model="observacao" placeholder="Deixe aqui alguma observação..."></textarea >
             </div>
             
           <div class="button-control">
@@ -71,19 +69,36 @@ import axios from 'axios';
 
             frutasApi: [],
             cremesApi: [],
-            basesApi: []
+            basesApi: [],
+            tamanhoApi: []
           }
         },
 
       methods: {
         getPedidos(e) {
             e.preventDefault()
-            console.log('nome:' , this.nome)
-            console.log('tamanho:' , this.tamanho)
-            console.log('base:' , this.baseSelecionada)
-            console.log('frutas:' , this.frutasSelecionadas)
-            console.log('cremes:' , this.cremesSelecionados)
-            console.log('obs:' , this.observacao)
+            const pedido = {
+                nome: this.nome,
+                tamanho: this.tamanho,
+                base: this.baseSelecionada,
+                frutas: this.frutasSelecionadas,
+                cremes: this.cremesSelecionados,
+                observacao: this.observacao,
+            }
+
+            try {
+                const response = axios.post('http://localhost:3000/pedidos' , pedido)
+                console.log(response.data)
+            } catch (error) {
+                console.log('erro ao enviar pedido:' , error)
+            }
+
+            this.nome = ""
+            this.tamanho = ""
+            this.baseSelecionada = ""
+            this.frutasSelecionadas = ""
+            this.cremesSelecionados = ""
+            this.observacao = ""
         },
 
         async getIgredientes() {
@@ -91,23 +106,34 @@ import axios from 'axios';
                 const response = await axios.get('http://localhost:3000/ingredientes')
                 this.frutasApi = response.data.frutas
                 this.cremesApi = response.data.cremes
-                console.log(this.frutasApi)
-                console.log(this.cremesApi)
             }catch(error) {
                 console.log(error)
             }
         },
 
         async getBase() {
+           try {
             const response = await axios.get('http://localhost:3000/bases')
             this.basesApi = response.data
-            console.log(this.basesApi)
+           } catch (error) {
+            console.log(error)
+           }
+        },
+
+        async getTamanho() {
+            try {
+                const response = await axios.get('http://localhost:3000/tamanhos') 
+                this.tamanhoApi = response.data
+            } catch (error) {
+                console.log(error)
+            }
         }
       },
 
       mounted() {
         this.getIgredientes()
         this.getBase()
+        this.getTamanho()
       }
     }
 </script>
@@ -197,7 +223,8 @@ import axios from 'axios';
     }
 
     .active {
-     outline: solid 3px blue;
+     outline: solid 4px rgb(59, 140, 215);
+     /* border: none solid 4px rgb(59, 140, 215); */
     }
 
     .base-container {

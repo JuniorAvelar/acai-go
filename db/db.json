@@ -1,34 +1,160 @@
 {
-    "pedidos": [],
-    "tamanhos": [
-      { "id": 1, "nome": "Pequeno" },
-      { "id": 2, "nome": "Médio" },
-      { "id": 3, "nome": "Grande" }
-    ],
-    "bases": [
-      { "id": 1, "nome": "Açaí tradicional" },
-      { "id": 2, "nome": "Açaí com banana" },
-      { "id": 3, "nome": "Açaí com morango" },
-      { "id": 4, "nome": "Açaí com whey (proteinado)" },
-      { "id": 5, "nome": "Cupuaçu" }
-    ],
-    "ingredientes": {
+  "pedidos": [
+    {
+      "id": "f1b6",
+      "nome": "edivaldo juniio",
+      "tamanho": "",
+      "base": "Açaí tradicional",
       "frutas": [
-        { "id": 1, "nome": "Banana" },
-        { "id": 2, "nome": "Morango" },
-        { "id": 3, "nome": "Manga" },
-        { "id": 4, "nome": "Kiwi" },
-        { "id": 5, "nome": "Uva" },
-        { "id": 6, "nome": "Abacaxi" }
+        "Banana",
+        "Morango",
+        "Kiwi"
       ],
       "cremes": [
-        { "id": 1, "nome": "Leite condensado" },
-        { "id": 2, "nome": "Nutella" },
-        { "id": 3, "nome": "Leite em pó" },
-        { "id": 4, "nome": "Creme de morango" },
-        { "id": 5, "nome": "Leite ninho trufado" },
-        { "id": 6, "nome": "Creme de avelã" }
-      ]
+        "Leite condensado",
+        "Creme de avelã"
+      ],
+      "observacao": "pagamento no cartão de credito "
+    },
+    {
+      "id": "6ecb",
+      "nome": "edivaldo juniio",
+      "tamanho": "Médio",
+      "base": "Açaí tradicional",
+      "frutas": [
+        "Banana",
+        "Morango",
+        "Kiwi"
+      ],
+      "cremes": [
+        "Leite condensado",
+        "Creme de avelã"
+      ],
+      "observacao": "pagamento no cartão de credito "
+    },
+    {
+      "id": "ffcd",
+      "nome": "",
+      "tamanho": "Grande",
+      "base": "",
+      "frutas": [],
+      "cremes": [],
+      "observacao": []
+    },
+    {
+      "id": "fd27",
+      "nome": "edivaldo junior",
+      "tamanho": "Pequeno",
+      "base": "",
+      "frutas": [],
+      "cremes": [],
+      "observacao": []
+    },
+    {
+      "id": "006b",
+      "nome": "edivaldo ",
+      "tamanho": "",
+      "base": "Açaí com banana",
+      "frutas": [
+        "Banana",
+        "Morango",
+        "Uva"
+      ],
+      "cremes": [
+        "Leite em pó",
+        "Creme de morango"
+      ],
+      "observacao": "pagameneto no cartão de credito"
     }
+  ],
+  "tamanhos": [
+    {
+      "id": "1",
+      "nome": "Pequeno"
+    },
+    {
+      "id": "2",
+      "nome": "Médio"
+    },
+    {
+      "id": "3",
+      "nome": "Grande"
+    }
+  ],
+  "bases": [
+    {
+      "id": "1",
+      "nome": "Açaí tradicional"
+    },
+    {
+      "id": "2",
+      "nome": "Açaí com banana"
+    },
+    {
+      "id": "3",
+      "nome": "Açaí com morango"
+    },
+    {
+      "id": "4",
+      "nome": "Açaí com whey (proteinado)"
+    },
+    {
+      "id": "5",
+      "nome": "Cupuaçu"
+    }
+  ],
+  "ingredientes": {
+    "frutas": [
+      {
+        "id": 1,
+        "nome": "Banana"
+      },
+      {
+        "id": 2,
+        "nome": "Morango"
+      },
+      {
+        "id": 3,
+        "nome": "Manga"
+      },
+      {
+        "id": 4,
+        "nome": "Kiwi"
+      },
+      {
+        "id": 5,
+        "nome": "Uva"
+      },
+      {
+        "id": 6,
+        "nome": "Abacaxi"
+      }
+    ],
+    "cremes": [
+      {
+        "id": 1,
+        "nome": "Leite condensado"
+      },
+      {
+        "id": 2,
+        "nome": "Nutella"
+      },
+      {
+        "id": 3,
+        "nome": "Leite em pó"
+      },
+      {
+        "id": 4,
+        "nome": "Creme de morango"
+      },
+      {
+        "id": 5,
+        "nome": "Leite ninho trufado"
+      },
+      {
+        "id": 6,
+        "nome": "Creme de avelã"
+      }
+    ]
   }
-  
+}
