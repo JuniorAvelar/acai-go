@@ -1,25 +1,26 @@
 <template>
     <div class="form-container">
             <h2>Monte seu pedido</h2>
-        <form id="form">
+        <form @submit="getPedidos($event)"  id="form" >
             <div class="input-control">
                 <label for="">Nome do cliente:</label>
-                <input type="text" placeholder="Digite seu nome">
+                <input type="text" placeholder="Digite seu nome" v-model="nome">
             </div>
 
             <div class="buttons-tamanho">
-                <label for="">Tamanho:</label>
-                <div class="button-control">
-                    <button>Pequeno</button>
-                    <button class="active">Médio</button>
-                    <button>Grande</button>
+                <label >Tamanho:</label>
+                <div class="buttons-control">
+                    <button @click="tamanho = 'Pequeno'" :class="{ active: tamanho === 'Pequeno'}">Pequeno</button>
+                    <button :class="{ active : tamanho === 'Médio'}" @click="tamanho = 'Médio'">Médio</button>
+                    <button @click="tamanho = 'Grande'" :class="{ active : tamanho == 'Grande'}">Grande</button>
                 </div>
             </div>
 
             <div class="base-container">
                 <label for="">Escolha a base:</label>
-                <select>
+                <select v-model="baseSelecionada">
                     <option value="">Selecione a base</option>
+                    <option v-for="base in basesApi" :key="base.id" :value="base.nome">{{ base.nome }}</option>
                 </select>
             </div>
 
@@ -27,63 +28,87 @@
                 <label>Escolha os Ingredientes:</label> 
                 <h4>Frutas:</h4>
                 <div class="checkbox-control">
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
+                   <div class="checkbox-container" v-for="fruta in frutasApi" :key="fruta.id" >
+                    <input type="checkbox" :value="fruta.nome" v-model="frutasSelecionadas"> 
+                    <label for="">{{ fruta.nome }}</label>
                    </div>
                 </div>
 
                 <h4>Cremes:</h4>
                 <div class="checkbox-control">
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
-                   </div>
-
-                   <div class="checkbox-container">
-                    <input type="checkbox"> 
-                    <label for="">Leite condensado</label>
+                   <div class="checkbox-container" v-for="creme in cremesApi" :key="creme.id">
+                    <input type="checkbox" :value="creme.nome" v-model="cremesSelecionados" > 
+                    <label for="">{{ creme.nome }}</label>
                    </div>
                 </div>
             </div>
 
             <div class="obs-container">
-                <span>Observações:</span>
-                <textarea name="" id="" placeholder="Deixe aqui alguma observação..."></textarea >
+                <label for="">Observações:</label>
+                <textarea v-model="observacao" name="" id="" placeholder="Deixe aqui alguma observação..."></textarea >
             </div>
             
+          <div class="button-control">
+            <button class="comfimar-button" value="submit">Confirmar Pedido</button>
+          </div>
         </form>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
     export default {
-        name: 'Form'
+        name: 'Form',
+
+        data() {
+          return {
+            nome: '',
+            tamanho: '',
+            baseSelecionada: '',
+            frutasSelecionadas: [],
+            cremesSelecionados: [],
+            observacao: [],
+
+            frutasApi: [],
+            cremesApi: [],
+            basesApi: []
+          }
+        },
+
+      methods: {
+        getPedidos(e) {
+            e.preventDefault()
+            console.log('nome:' , this.nome)
+            console.log('tamanho:' , this.tamanho)
+            console.log('base:' , this.baseSelecionada)
+            console.log('frutas:' , this.frutasSelecionadas)
+            console.log('cremes:' , this.cremesSelecionados)
+            console.log('obs:' , this.observacao)
+        },
+
+        async getIgredientes() {
+            try {
+                const response = await axios.get('http://localhost:3000/ingredientes')
+                this.frutasApi = response.data.frutas
+                this.cremesApi = response.data.cremes
+                console.log(this.frutasApi)
+                console.log(this.cremesApi)
+            }catch(error) {
+                console.log(error)
+            }
+        },
+
+        async getBase() {
+            const response = await axios.get('http://localhost:3000/bases')
+            this.basesApi = response.data
+            console.log(this.basesApi)
+        }
+      },
+
+      mounted() {
+        this.getIgredientes()
+        this.getBase()
+      }
     }
 </script>
 
@@ -151,7 +176,7 @@
         flex-direction: column;
     }
 
-    .button-control button {
+    .buttons-control button {
         border-radius: 20px;
         width: 100px;
         height: 45px;
@@ -162,18 +187,18 @@
         background-color: #D9D9D9;
     }
 
-    .button-control button:hover {
+    .buttons-control button:hover {
         background: #b4b4b4;
     }
 
-    .button-control {
+    .buttons-control {
         display: flex;
         gap: 12px;
     }
 
-    /* .active {
+    .active {
      outline: solid 3px blue;
-    } */
+    }
 
     .base-container {
         display: flex;
@@ -224,11 +249,10 @@
         resize: none;
     }
 
-    .obs-container label {
+    .obs-container  label {
         font-size: 20px;
         font-weight: 300;
-        margin-bottom: 1rem;
-        margin-top:1rem ;
+        margin: 1rem 0;
     }
 
     .obs-container textarea {
@@ -242,6 +266,32 @@
 
     .obs-container textarea::placeholder {
         color: #1b1a1a;
+    }
+
+    .button-control .comfimar-button {
+        color: #fff;
+        background-color: #6C1DAB;
+        border:none;
+        width: 300px;
+        height: 50px;
+        font-weight: bold;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 3rem 0;
+        transition: linear 0.4s;
+    }
+
+    .button-control .comfimar-button:hover {
+        color: #6C1DAB;
+        background-color: #fff;
+        border: solid 1px #6C1DAB;
+    }
+
+    .button-control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 

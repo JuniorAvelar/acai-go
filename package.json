@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "acai-go": "file:",
+    "axios": "^1.8.4",
     "core-js": "^3.8.3",
     "json-server": "^1.0.0-beta.3",
     "vue": "^3.2.13",
