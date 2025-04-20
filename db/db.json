@@ -1,43 +1,5 @@
 {
-  "pedidos": [
-    {
-      "id": "030d",
-      "nome": "edivaldo ",
-      "tamanho": "Pequeno",
-      "base": "Açaí tradicional",
-      "frutas": [
-        "Banana",
-        "Morango",
-        "Manga",
-        "Uva",
-        "Abacaxi",
-        "Kiwi"
-      ],
-      "cremes": [
-        "Leite condensado",
-        "Leite em pó",
-        "Leite ninho trufado"
-      ],
-      "observacao": "sdfsdfsdf",
-      "status": "Solicitado"
-    },
-    {
-      "id": "9060",
-      "nome": "santsos ",
-      "tamanho": "",
-      "base": "Açaí com whey (proteinado)",
-      "frutas": [
-        "Banana",
-        "Manga"
-      ],
-      "cremes": [
-        "Leite ninho trufado",
-        "Creme de avelã"
-      ],
-      "observacao": "sdfsdfsfsdfsdfsdfsdfsdfsf",
-      "status": "Solicitado"
-    }
-  ],
+  "pedidos": [],
   "tamanhos": [
     {
       "id": "1",
@@ -127,5 +89,23 @@
         "nome": "Creme de avelã"
       }
     ]
-  }
+  },
+  "status": [
+    {
+      "id": 1,
+      "nome": "Solicitado"
+    },
+    {
+      "id": 2,
+      "nome": "Em Preparo"
+    },
+    {
+      "id": 3,
+      "nome": "Pronto"
+    },
+    {
+      "id": 4,
+      "nome": "Cancelado"
+    }
+  ]
 }

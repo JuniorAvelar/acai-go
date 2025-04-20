@@ -1,28 +1,31 @@
 <template>
     <h1>Pedidos</h1>
-    <select>
-      <option value="">prontos</option>
+    <select class="select-status">
+      <option  v-for="status in statusApi" :key="status.id" :value="status.nome">{{ status.nome }}</option>
     </select>
     <div class="pedidos-container">
 
+     <template v-if="pedidos.length">
       <div class="pedido" v-for="pedido in pedidos" :key="pedido.id">
         <div class="peddido-header">
           <span>ID: # {{ pedido.id }}</span>
           <span>Nome: {{ pedido.nome }}</span>
-          <div class="status-pedido">{{ pedido.status }}</div>
+          <div :class="['status-pedido ', pedido.status]"> {{ pedido.status }}</div>
         </div>
         <div class="pedido-content">
           <span class="strong">Tamaho: <span class="text-sub"> {{ pedido.tamanho }} </span> </span>
           <span class="strong">Base: <span class="text-sub"> {{ pedido.base }} </span> </span>
           <span class="strong">Frutas: <span class="text-sub"> {{ pedido.frutas.join(', ') }} </span> </span>
           <span class="strong">Cremes: <span class="text-sub"> {{ pedido.cremes.join(', ') }}</span> </span>
-          <span class="strong">Obs: <span class="text-sub">{{ pedido.observacao }} </span>  </span>
+          <span v-if="pedido.observacao.length" class="strong">Obs: <span class="text-sub">{{ pedido.observacao }} </span>  </span>
         </div>
         <div class="buttons-control">
-          <button class="button-cancelar">Pronto</button>
-          <button class="button-pronto">Cancelar</button>
+          <button class="button-pronto" @click="updatedStatus(pedido, 'Pronto' )">Pronto</button>
+          <button class="button-cancelar" @click="cancelarPedido(pedido)">Cancelar</button> 
         </div>
       </div>
+     </template>
+     <h2 v-else>Sem pedidos no momento</h2>
 
     </div>
 
@@ -35,7 +38,9 @@ import axios from 'axios';
     name: 'Pedidos',
     data() {
       return {
-        pedidos: []
+        pedidos: [],
+
+        statusApi:[],
       }
     },
 
@@ -44,11 +49,41 @@ import axios from 'axios';
         const response = await axios.get('http://localhost:3000/pedidos') 
         this.pedidos = response.data
         console.log('Pedido',this.pedidos)
+      },
+
+      async getStatus() {
+        const response = await axios.get('http://localhost:3000/status')
+        this.statusApi = response.data
+        this.status = this.statusApi[0].nome
+      },
+
+      async updatedStatus(pedido , novoStatus) {
+        try {
+          await axios.patch(`http://localhost:3000/pedidos/${pedido.id}` , {
+            status:novoStatus
+          })
+          this.getPedidos()
+          this.getStatus()
+
+        } catch (error) {
+          console.log("Erro ao atulizar o pedido" , error)
+        }
+      },  
+
+      async cancelarPedido(pedido) {
+        try {
+          await axios.delete(`http://localhost:3000/pedidos/${pedido.id}`)
+          this.getPedidos()
+          this.getStatus()
+        } catch (error) {
+          console.log('Erro ao apagar o pedido' , error)
+        }
       }
     },
 
     mounted() {
       this.getPedidos()
+      this.getStatus()
     }
   }
 </script>
@@ -60,6 +95,17 @@ import axios from 'axios';
     margin-left: 40px;
   }
 
+  .select-status {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 8px;
+    width: 150px;
+    border: none;
+    background: #D9D9D9;
+    margin-left: 40px;
+  }
+
+
   .pedidos-container {
     padding: 25px;
     display: flex;
@@ -70,26 +116,34 @@ import axios from 'axios';
   }
 
   .pedido {
-    height: 300px;
-    /* width: auto; */
-    min-width: 500px;
+    height: 400px;
+    width: 460px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     border-radius: 8px;
-    padding: 20px;
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
   }
 
   .peddido-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     font-size: 20px;
     font-weight: bold;
+    border-bottom:solid 2px #200D2F;
   }
 
   .status-pedido {
     border: solid 1px #fff;
-    width: 60px;
+    width: 70px;
     height: 24px;
     font-size: 10px;
+    padding: 10px;
 
     background: #70B600;
     border-radius: 20px;
@@ -100,6 +154,16 @@ import axios from 'axios';
     align-items: center;
   }
 
+  .status-pedido.Solicitado {
+    background: #e5b413;
+    color: #333;
+  }
+
+  .status-pedido.Pronto {
+    background: #0de643;
+    color: #ffffff;
+  }
+  
   .pedido-content {
     display: flex;
     flex-direction: column;
@@ -110,10 +174,12 @@ import axios from 'axios';
 
   .strong {
     font-weight: 600 ;
+    font-size: 16px;
+    width: 100%;
   }
   
   .text-sub {
-    color: #333;
+    color: #000000;
     font-weight: 300;
   }
 
@@ -122,15 +188,19 @@ import axios from 'axios';
     width: 100px;
     border-radius: 8px;
     border: none;
-    background-color: #FF0000;
+    background-color: #059c2b;
     color: #fff;
     font-weight: bold;
     margin-right: 12px;
     cursor: pointer;
   }
 
+  .button-pronto:hover ,.button-cancelar:hover {
+    opacity: 0.8;
+  }
+
   .button-cancelar {
-    background: #70B600;
+    background: #db1c1c;
   }
 
 </style>

@@ -97,9 +97,8 @@ import axios from 'axios';
             this.nome = ""
             this.tamanho = ""
             this.baseSelecionada = ""
-            this.frutasSelecionadas = ""
-            this.cremesSelecionados = ""
-            this.observacao = ""
+            this.frutasSelecionadas = []
+            this.cremesSelecionados = []
             this.observacao = ""
         },
 
@@ -226,8 +225,7 @@ import axios from 'axios';
 
     .active {
      outline: solid 4px rgb(59, 140, 215);
-     /* border: none solid 4px rgb(59, 140, 215); */
-    }
+        }
 
     .base-container {
         display: flex;
