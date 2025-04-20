@@ -84,6 +84,7 @@ import axios from 'axios';
                 frutas: this.frutasSelecionadas,
                 cremes: this.cremesSelecionados,
                 observacao: this.observacao,
+                status: 'Solicitado',
             }
 
             try {
@@ -98,6 +99,7 @@ import axios from 'axios';
             this.baseSelecionada = ""
             this.frutasSelecionadas = ""
             this.cremesSelecionados = ""
+            this.observacao = ""
             this.observacao = ""
         },
 

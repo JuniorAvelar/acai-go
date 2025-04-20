@@ -1,70 +1,41 @@
 {
   "pedidos": [
     {
-      "id": "f1b6",
-      "nome": "edivaldo juniio",
-      "tamanho": "",
-      "base": "Açaí tradicional",
-      "frutas": [
-        "Banana",
-        "Morango",
-        "Kiwi"
-      ],
-      "cremes": [
-        "Leite condensado",
-        "Creme de avelã"
-      ],
-      "observacao": "pagamento no cartão de credito "
-    },
-    {
-      "id": "6ecb",
-      "nome": "edivaldo juniio",
-      "tamanho": "Médio",
-      "base": "Açaí tradicional",
-      "frutas": [
-        "Banana",
-        "Morango",
-        "Kiwi"
-      ],
-      "cremes": [
-        "Leite condensado",
-        "Creme de avelã"
-      ],
-      "observacao": "pagamento no cartão de credito "
-    },
-    {
-      "id": "ffcd",
-      "nome": "",
-      "tamanho": "Grande",
-      "base": "",
-      "frutas": [],
-      "cremes": [],
-      "observacao": []
-    },
-    {
-      "id": "fd27",
-      "nome": "edivaldo junior",
-      "tamanho": "Pequeno",
-      "base": "",
-      "frutas": [],
-      "cremes": [],
-      "observacao": []
-    },
-    {
-      "id": "006b",
+      "id": "030d",
       "nome": "edivaldo ",
-      "tamanho": "",
-      "base": "Açaí com banana",
+      "tamanho": "Pequeno",
+      "base": "Açaí tradicional",
       "frutas": [
         "Banana",
         "Morango",
-        "Uva"
+        "Manga",
+        "Uva",
+        "Abacaxi",
+        "Kiwi"
       ],
       "cremes": [
+        "Leite condensado",
         "Leite em pó",
-        "Creme de morango"
+        "Leite ninho trufado"
       ],
-      "observacao": "pagameneto no cartão de credito"
+      "observacao": "sdfsdfsdf",
+      "status": "Solicitado"
+    },
+    {
+      "id": "9060",
+      "nome": "santsos ",
+      "tamanho": "",
+      "base": "Açaí com whey (proteinado)",
+      "frutas": [
+        "Banana",
+        "Manga"
+      ],
+      "cremes": [
+        "Leite ninho trufado",
+        "Creme de avelã"
+      ],
+      "observacao": "sdfsdfsfsdfsdfsdfsdfsdfsf",
+      "status": "Solicitado"
     }
   ],
   "tamanhos": [
