@@ -113,7 +113,7 @@ import Mensagem from './Mensagem.vue';
 
             setTimeout(() => {
                 this.msg = false
-            }, 3000)
+            }, 2000)
 
         },
 
