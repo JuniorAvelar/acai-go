@@ -2,13 +2,17 @@
 <template>
     <div class="alerta-container">
         <i class="fa-solid fa-check"></i> 
-        <p>Pedido enviado com sucesso!</p>                                                              
+        <p>{{ msg }}</p>                                                              
     </div>
 </template>
 
 <script>
     export default {
-        name: 'Mensagem'
+        name: 'Mensagem',
+
+        props: {
+            msg : String
+        }
     }
 </script>
 

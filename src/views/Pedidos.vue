@@ -1,4 +1,5 @@
 <template>
+    <mensagem v-show="msg" :msg="msg"/>
     <h1>Pedidos</h1>
     <select class="select-status">
       <option  v-for="status in statusApi" :key="status.id" :value="status.nome">{{ status.nome }}</option>
@@ -8,8 +9,9 @@
      <template v-if="pedidos.length">
       <div class="pedido" v-for="pedido in pedidos" :key="pedido.id">
         <div class="peddido-header">
-          <span>ID: # {{ pedido.id }}</span>
+          <span>ID: #{{ pedido.id }}</span>
           <span>Nome: {{ pedido.nome }}</span>
+          <!-- Container que exibe o status do pedido com classes dinâmicas -->
           <div :class="['status-pedido ', pedido.status]"> {{ pedido.status }}</div>
         </div>
         <div class="pedido-content">
@@ -28,19 +30,25 @@
      <h2 v-else>Sem pedidos no momento</h2>
 
     </div>
-
 </template>
 
 <script>
 import axios from 'axios';
+import Mensagem from '@/components/Mensagem.vue';
 
   export default {
     name: 'Pedidos',
+    components: {
+      Mensagem,
+    },
+
     data() {
       return {
         pedidos: [],
 
         statusApi:[],
+
+        msg:'',
       }
     },
 
@@ -59,7 +67,8 @@ import axios from 'axios';
 
       async updatedStatus(pedido , novoStatus) {
         try {
-          await axios.patch(`http://localhost:3000/pedidos/${pedido.id}` , {
+          // Envia requisição PATCH para a API, alterando apenas o campo `status` do pedido especificado
+          await axios.patch(`http://localhost:3000/pedidos/${pedido.id}`, {
             status:novoStatus
           })
           this.getPedidos()
@@ -70,14 +79,23 @@ import axios from 'axios';
         }
       },  
 
+//         
       async cancelarPedido(pedido) {
         try {
+          // Envia requisição DELETE para a API, removendo o pedido com o ID informado
           await axios.delete(`http://localhost:3000/pedidos/${pedido.id}`)
+          // atualiza os pedidos na tela 
           this.getPedidos()
           this.getStatus()
         } catch (error) {
           console.log('Erro ao apagar o pedido' , error)
         }
+
+        this.msg = "Pedido cancelado com sucesso!"
+
+        setTimeout(() => {
+          this.msg = ""
+        } ,3000)
       }
     },
 

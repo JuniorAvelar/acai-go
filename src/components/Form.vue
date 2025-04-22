@@ -1,10 +1,11 @@
 <template>
+    <Mensagem v-show="msg" :msg="msg"/>
     <div class="form-container">
             <h2>Monte seu pedido</h2>
         <form @submit="getPedidos($event)"  id="form" >
             <div class="input-control">
                 <label for="">Nome do cliente:</label>
-                <input type="text" placeholder="Digite seu nome" v-model="nome">
+                <input type="text" placeholder="Digite seu nome" v-model="nome" required>
             </div>
 
             <div class="buttons-tamanho">
@@ -55,8 +56,13 @@
 
 <script>
 import axios from 'axios';
+import Mensagem from './Mensagem.vue';
     export default {
         name: 'Form',
+
+        components: {
+            Mensagem,
+        },
 
         data() {
           return {
@@ -70,7 +76,9 @@ import axios from 'axios';
             frutasApi: [],
             cremesApi: [],
             basesApi: [],
-            tamanhoApi: []
+            tamanhoApi: [],
+
+            msg: ""
           }
         },
 
@@ -100,6 +108,13 @@ import axios from 'axios';
             this.frutasSelecionadas = []
             this.cremesSelecionados = []
             this.observacao = ""
+
+            this.msg = "Pedido enviado com sucesso!"
+
+            setTimeout(() => {
+                this.msg = false
+            }, 3000)
+
         },
 
         async getIgredientes() {
