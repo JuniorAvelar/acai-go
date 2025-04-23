@@ -1,13 +1,13 @@
 <template>
     <mensagem v-show="msg" :msg="msg"/>
     <h1>Pedidos</h1>
-    <select class="select-status">
+    <select class="select-status" v-model="statusSelecionado">
       <option  v-for="status in statusApi" :key="status.id" :value="status.nome">{{ status.nome }}</option>
     </select>
     <div class="pedidos-container">
 
      <template v-if="pedidos.length">
-      <div class="pedido" v-for="pedido in pedidos" :key="pedido.id">
+      <div class="pedido" v-for="pedido in filterStatus" :key="pedido.id">
         <div class="peddido-header">
           <span>ID: #{{ pedido.id }}</span>
           <span>Nome: {{ pedido.nome }}</span>
@@ -45,24 +45,25 @@ import Mensagem from '@/components/Mensagem.vue';
     data() {
       return {
         pedidos: [],
-
         statusApi:[],
-
         msg:'',
+        statusSelecionado:""
       }
     },
 
     methods: {
+      // Envia uma requisição GET para a api, que retorna todos o pedidos
       async getPedidos(){
         const response = await axios.get('http://localhost:3000/pedidos') 
         this.pedidos = response.data
-        console.log('Pedido',this.pedidos)
       },
-
+      // Envia uma requicição GET para a api, para buscar os status e renderiza-los na tela  
       async getStatus() {
         const response = await axios.get('http://localhost:3000/status')
         this.statusApi = response.data
-        this.status = this.statusApi[0].nome
+        
+        // inicializa a varialvel "statusSelecionado" com o status de "pronto"  
+        this.statusSelecionado = this.statusApi[0].nome
       },
 
       async updatedStatus(pedido , novoStatus) {
@@ -71,6 +72,7 @@ import Mensagem from '@/components/Mensagem.vue';
           await axios.patch(`http://localhost:3000/pedidos/${pedido.id}`, {
             status:novoStatus
           })
+          // atualiza os pedidos e status
           this.getPedidos()
           this.getStatus()
 
@@ -78,8 +80,7 @@ import Mensagem from '@/components/Mensagem.vue';
           console.log("Erro ao atulizar o pedido" , error)
         }
       },  
-
-//         
+       
       async cancelarPedido(pedido) {
         try {
           // Envia requisição DELETE para a API, removendo o pedido com o ID informado
@@ -91,17 +92,32 @@ import Mensagem from '@/components/Mensagem.vue';
           console.log('Erro ao apagar o pedido' , error)
         }
 
+        // passa a mensagem   para a variavel msg que esta sendo passado por meio de prop para o componet menssagen
         this.msg = "Pedido cancelado com sucesso!"
 
+        // remove o alert de sucesso da tela 
         setTimeout(() => {
           this.msg = ""
-        } ,3000)
-      }
+        } ,2000)
+      },
     },
 
+    // // Quando o componente Pedidos for montado na tela, chama as funções getPedidos e getStatus
     mounted() {
       this.getPedidos()
       this.getStatus()
+    },
+
+    // filtra os pedidos conforme o status
+    //computed monitora alteração na variavel "statusSelecionado", se houver ela faz um verificação
+    computed: {
+      filterStatus() {
+        // Se o status selecionado for "Todos", retorna todos os pedidos
+        if(this.statusSelecionado === "Todos") return this.pedidos
+
+         // Caso contrário, retorna apenas os pedidos com o status correspondente
+        return this.pedidos.filter((p => p.status === this.statusSelecionado))
+    },
     }
   }
 </script>
@@ -172,6 +188,7 @@ import Mensagem from '@/components/Mensagem.vue';
     align-items: center;
   }
 
+/* Um único elemento que contém as duas classses  */
   .status-pedido.Solicitado {
     background: #e5b413;
     color: #333;
