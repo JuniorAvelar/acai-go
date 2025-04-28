@@ -1,7 +1,7 @@
 <template>
-    <div>
-        footer
-    </div>
+    <footer>
+        <p>Kohaydev &copy; 2025</p>
+    </footer>
 </template>
 
 <script>
@@ -11,9 +11,18 @@
 </script>
 
 <style scoped>
-    div {
+    footer {
         background-color: #9E42EC;
-        height: 200px;
-        position: relative;
+        height: 150px;
+        width: 100%;    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer p {
+        text-align: center;
+        color: #fff;
+        font-style: italic;
     }
 </style>
