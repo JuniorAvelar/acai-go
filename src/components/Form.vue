@@ -11,7 +11,7 @@
             <div class="buttons-tamanho">
                 <label >Tamanho:</label>
                 <div class="buttons-control">
-                    <button v-for="t in tamanhoApi" :key="t.id" @click="tamanho = t.nome" :class="{ active: tamanho === t.nome}">{{ t.nome }}</button>
+                    <span class="button-tamanho" v-for="t in tamanhoApi" :key="t.id" @click="tamanho = t.nome" :class="{ active: tamanho === t.nome}">{{ t.nome }}</span>
                 </div>
             </div>
 
@@ -57,6 +57,9 @@
 <script>
 import axios from 'axios';
 import Mensagem from './Mensagem.vue';
+import router from '@/router';
+
+
     export default {
         name: 'Form',
 
@@ -83,6 +86,7 @@ import Mensagem from './Mensagem.vue';
         },
 
       methods: {
+
         getPedidos(e) {
             e.preventDefault()
             const pedido = {
@@ -218,18 +222,24 @@ import Mensagem from './Mensagem.vue';
         flex-direction: column;
     }
 
-    .buttons-control button {
+    .button-tamanho {
+        cursor: pointer;
+
         border-radius: 20px;
         width: 100px;
         height: 45px;
         padding: 10px;
         border: solid 1px #ccc;
         cursor: pointer;
-        transition: 0.4s;
+        transition: 0.2s;
         background-color: #D9D9D9;
+
+        text-align: center;
     }
 
-    .buttons-control button:hover {
+  
+
+    .buttons-control .button-tamanho:hover {
         background: #b4b4b4;
     }
 
@@ -239,7 +249,7 @@ import Mensagem from './Mensagem.vue';
     }
 
     .active {
-     outline: solid 4px rgb(59, 140, 215);
+     outline: solid 3px rgb(59, 140, 215);
         }
 
     .base-container {
