@@ -1,45 +1,30 @@
 <template>
     <mensagem v-show="msg" :msg="msg"/>
     <h1>Pedidos</h1>
-    <select class="select-status" v-model="statusSelecionado">
-      <option  v-for="status in statusApi" :key="status.id" :value="status.nome">{{ status.nome }}</option>
-    </select>
-    <div class="pedidos-container">
 
-     <template v-if="pedidos.length">
-      <div class="pedido" v-for="pedido in filterStatus" :key="pedido.id">
-        <div class="peddido-header">
-          <span>ID: #{{ pedido.id }}</span>
-          <span>Nome: {{ pedido.nome }}</span>
-          <!-- Container que exibe o status do pedido com classes dinâmicas -->
-          <div :class="['status-pedido ', pedido.status]"> {{ pedido.status }}</div>
-        </div>
-        <div class="pedido-content">
-          <span class="strong">Tamaho: <span class="text-sub"> {{ pedido.tamanho }} </span> </span>
-          <span class="strong">Base: <span class="text-sub"> {{ pedido.base }} </span> </span>
-          <span class="strong">Frutas: <span class="text-sub"> {{ pedido.frutas.join(', ') }} </span> </span>
-          <span class="strong">Cremes: <span class="text-sub"> {{ pedido.cremes.join(', ') }}</span> </span>
-          <span v-if="pedido.observacao.length" class="strong">Obs: <span class="text-sub">{{ pedido.observacao }} </span>  </span>
-        </div>
-        <div class="buttons-control">
-          <button class="button-pronto" @click="updatedStatus(pedido, 'Pronto' )">Pronto</button>
-          <button class="button-cancelar" @click="cancelarPedido(pedido)">Cancelar</button> 
-        </div>
-      </div>
-     </template>
-     <h2 v-else>Sem pedidos no momento</h2>
-
-    </div>
+    <SelectStatus
+     :statusApi="statusApi"
+      v-model:statusSelecionado="statusSelecionado"
+    />
+    <PedidoCard :pedidos="pedidos" 
+      :filterStatus="filterStatus"
+      @updatedStatus="updatedStatus" 
+      @cancelarPedido="cancelarPedido" 
+     />
 </template>
 
 <script>
 import axios from 'axios';
 import Mensagem from '@/components/Mensagem.vue';
+import SelectStatus from './SelectStatus.vue';
+import PedidoCard from './PedidoCard.vue';
 
   export default {
     name: 'Pedidos',
     components: {
       Mensagem,
+      SelectStatus,
+      PedidoCard,
     },
 
     data() {
@@ -98,7 +83,7 @@ import Mensagem from '@/components/Mensagem.vue';
         // remove o alert de sucesso da tela 
         setTimeout(() => {
           this.msg = ""
-        } ,2000)
+        } ,1500)
       },
     },
 
@@ -113,7 +98,7 @@ import Mensagem from '@/components/Mensagem.vue';
     computed: {
       filterStatus() {
         // Se o status selecionado for "Todos", retorna todos os pedidos
-        if(this.statusSelecionado === "Todos") return this.pedidos
+        if(this.statusSelecionado === "Todos") return this.pedidos 
 
          // Caso contrário, retorna apenas os pedidos com o status correspondente
         return this.pedidos.filter((p => p.status === this.statusSelecionado))
@@ -128,17 +113,6 @@ import Mensagem from '@/components/Mensagem.vue';
     font-size: 3rem;
     margin-left: 40px;
   }
-
-  .select-status {
-    padding: 5px;
-    font-size: 14px;
-    border-radius: 8px;
-    width: 150px;
-    border: none;
-    background: #D9D9D9;
-    margin-left: 40px;
-  }
-
 
   .pedidos-container {
     padding: 25px;

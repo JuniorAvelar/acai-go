@@ -4,7 +4,7 @@
         <h2>"AçaíGo: mais que um pedido, uma experiência gelada."</h2>
        </div>
        <div class="hero-img">
-        <img src="/img/hero.png" alt="">
+        <img src="" alt="">
         <div class="shape"></div>
        </div>
     </div>

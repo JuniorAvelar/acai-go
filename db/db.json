@@ -93,19 +93,15 @@
   "status": [
     {
       "id": "1",
-      "nome": "Solicitado"
+      "nome": "Todos"
     },
     {
       "id": "2",
-      "nome": "Em Preparo"
+      "nome": "Solicitado"
     },
     {
       "id": "3",
       "nome": "Pronto"
-    },
-    {
-      "id": "4",
-      "nome": "Cancelado"
     }
   ]
 }

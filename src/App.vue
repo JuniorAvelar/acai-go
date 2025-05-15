@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div id="main-content">
   <NavBar/>
   <router-view/>
   <Footer/>
@@ -30,5 +30,11 @@
     font-style: normal;
   }
 
+  #main-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;  
+    justify-content: space-between;
+  }
 
 </style>
