@@ -20,14 +20,14 @@
                     <span v-if="pedido.observacao.length" class="strong">Obs: <span class="text-sub">{{ pedido.observacao }} </span>  </span>
                 </div>
                 <div class="buttons-control">
+                    <!-- emite um evento para o pai quando o butão é clicado passando o pedido e uma string -->
                     <button class="button-pronto" @click="$emit('updatedStatus', pedido,'Pronto' )">Pronto</button>
 
-                    <button class="button-cancelar" @click="$emit('cancelarPedido',pedido)">Cancelar</button> 
+                    <button class="button-cancelar" @click="$emit('confirmCancel',pedido)">Cancelar</button> 
                 </div>
             </div>
             </template>
             <h2 v-else>Sem pedidos no momento</h2>
-
         </div>
     </div>
 </template>
