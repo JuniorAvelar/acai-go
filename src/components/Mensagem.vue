@@ -2,7 +2,7 @@
 <template>
     <div class="alerta-container">
         <i class="fa-solid fa-check"></i> 
-        <p>{{ msg }}</p>                                                              
+        <p class="msg">{{ msg }}</p>                                                              
     </div>
 </template>
 
@@ -24,10 +24,11 @@
         z-index: 99;
 
         width: 300px;
-        height: 60px;
+        height: 55px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding-inline: 10px;
         
         display: flex;
         align-items: center;
@@ -39,5 +40,9 @@
     .fa-solid.fa-check {
         color: green;
         font-size: 20px;
+    }
+
+    .msg {
+        margin-left: 5px;
     }
 </style>
